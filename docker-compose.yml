@@ -16,23 +16,22 @@ services:
       - .env
     networks:
       - koa-lit_webnet
-  #    depends_on:
-  #      - postgres
-  # client:
-  #   container_name: client
-  #   build:
-  #     context: ./party-haan-react
-  #   #   target: development
-  #   volumes:
-  #     - ./party-haan-react:/usr/src/app
-  #     - /usr/src/app/node_modules
-  #   ports:
-  #     - ${CLIENT_PORT}:${CLIENT_PORT}
-  #   command: npm start
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - webnet
+    #    depends_on:
+    #      - postgres
+  fe:
+    container_name: koa-lit_fe
+    build:
+      context: ./koa-lit-docker-demo-fe
+    volumes:
+      - ./koa-lit-docker-demo-fe:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - ${CLIENT_HOST_PORT}:${CLIENT_DOCKER_PORT}
+    command: npm run serve
+    env_file:
+      - .env
+    networks:
+      - koa-lit_webnet
 #  postgres:
 #    container_name: postgres
 #    image: postgres:12
